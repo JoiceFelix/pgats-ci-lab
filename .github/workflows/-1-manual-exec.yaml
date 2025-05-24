@@ -1,0 +1,26 @@
+name: 'Execução manual'
+
+on: 
+    workflow_dispatch: 
+
+jobs:
+    e2e-tests:
+        runs-on: ubunto-latest
+
+        steps:
+         - uses: actions/checkout@v4
+         - uses: actions/setup-node@v4
+           with:
+            node-version: latest
+
+         - name: Instalando yarn
+           run: nom install -g yarn
+           
+         - name: Instalando dependências
+           run: yarn 
+
+         - name: Instalando Playwright
+           run: yarn Playwright install
+
+         - name: Executando Testes E2E
+           run: yarn run e2e
