@@ -15,12 +15,12 @@ jobs:
 
          - name: Instalando yarn
            run: nom install -g yarn
-           
+
          - name: Instalando dependências
            run: yarn 
 
-         - name: Instalando Playwright
-           run: yarn Playwright install
+         - name: Instalando playwright
+           run: yarn playwright install
 
          - name: Executando Testes E2E
            run: yarn run e2e
