@@ -1,9 +1,10 @@
 name: 'Disparo após a conclusão após a conclusão de um pipeline de deploy'
 
 on: 
-    workflow_run: ['Execução manual']
-    types:
-        - completed
+    workflow_run: 
+        workflows: ['Execução manual']
+        types:
+            - completed
 
 jobs:
     e2e-tests:
