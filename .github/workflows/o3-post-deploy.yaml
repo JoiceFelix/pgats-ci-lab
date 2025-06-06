@@ -1,0 +1,28 @@
+name: 'Disparo após a conclusão após a conclusão de um pipeline de deploy'
+
+on: 
+    workflow_run: ['Execução manual']
+    types:
+        - completed
+
+jobs:
+    e2e-tests:
+        runs-on: ubuntu-latest
+
+        steps:
+         - uses: actions/checkout@v4
+         - uses: actions/setup-node@v4
+           with:
+            node-version: latest
+
+         - name: Instalando yarn
+           run: npm install -g yarn
+
+         - name: Instalando dependências
+           run: yarn 
+
+         - name: Instalando playwright
+           run: yarn playwright install
+
+         - name: Executando Testes E2E
+           run: yarn run e2e
