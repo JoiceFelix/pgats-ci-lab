@@ -1,4 +1,4 @@
-name: 'Disparo após a conclusão de um pipeline de deploy'
+name: 'Execução apos o deploy'
 
 on: 
     workflow_run: 
