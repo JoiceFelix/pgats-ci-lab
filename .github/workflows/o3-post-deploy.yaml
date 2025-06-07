@@ -10,8 +10,13 @@ jobs:
     e2e-tests:
         runs-on: ubuntu-latest
 
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+        #passos do script de build
         steps:
+        #clone do projeto
          - uses: actions/checkout@v4
+        #instalação do node
          - uses: actions/setup-node@v4
            with:
             node-version: latest
