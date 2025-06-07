@@ -1,40 +1,40 @@
 name: 'Execução apos o deploy'
 
-on: 
-    workflow_run: 
-        workflows: ['Execução manual']
-        types:
-            - completed
+on:
+  workflow_run:
+    workflows: ['Execução manual']
+    types:
+      - completed
 
 jobs:
-    e2e-tests:
-        runs-on: ubuntu-latest
+  e2e-tests:
+    runs-on: ubuntu-latest
 
-        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
-        #passos do script de build
-        steps:
-        #clone do projeto
-         - uses: actions/checkout@v4
-        #instalação do node
-         - uses: actions/setup-node@v4
-           with:
-            node-version: latest
+    #passos do script de build
+    steps:
+      #clone do projeto
+      - uses: actions/checkout@v4
+      #instalação do node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: latest
 
-         - name: Instalando yarn
-           run: npm install -g yarn
+      - name: Instalando yarn
+        run: npm install -g yarn
 
-         - name: Instalando dependências
-           run: yarn 
+      - name: Instalando dependências
+        run: yarn
 
-         - name: Instalando playwright
-           run: yarn playwright install
+      - name: Instalando playwright
+        run: yarn playwright install
 
-         - name: Executando Testes E2E
-           run: yarn run e2e
+      - name: Executando Testes E2E
+        run: yarn run e2e
 
-         - uses: actions/upload-artifact@v4
-           if: ${{ !cancelled() }} 
-           with: 
-            name: e2e-test-results
-            path: ./playwright-report
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: e2e-test-results
+          path: ./playwright-report
