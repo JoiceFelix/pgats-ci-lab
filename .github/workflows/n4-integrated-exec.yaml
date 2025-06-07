@@ -46,7 +46,7 @@ jobs:
 
   e2e-tests:
     runs-on: ubuntu-latest
-    needs: [inspecao]
+    needs: [inspecao, unidade]
 
     steps:
       - uses: actions/checkout@v4
